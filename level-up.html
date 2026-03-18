@@ -3,10 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level Up</title>
+    <title>Level Up System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .habit {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Level Up</h1>
-    <p>Welcome to the Level Up page!</p>
+    <div class="container">
+        <h1>Level Up System</h1>
+        <div id="habitList"></div>
+        <h2>Your XP: <span id="xp">0</span></h2>
+        <h2>Your Level: <span id="level">1</span></h2>
+    </div>
+
+    <script>
+        const habits = [];
+        let xp = 0;
+        let level = 1;
+
+        function addHabit(name) {
+            habits.push({ name: name, completed: false });
+            updateHabitList();
+        }
+
+        function completeHabit(index) {
+            if (!habits[index].completed) {
+                habits[index].completed = true;
+                xp += 10;
+                updateLevel();
+                updateHabitList();
+            }
+        }
+
+        function updateHabitList() {
+            const habitList = document.getElementById('habitList');
+            habitList.innerHTML = '';
+            habits.forEach((habit, index) => {
+                habitList.innerHTML += `<div class='habit'>${habit.name} <button onclick='completeHabit(${index})'>Complete</button></div>`;
+            });
+        }
+
+        function updateLevel() {
+            if (xp >= level * 100) {
+                level += 1;
+            }
+            document.getElementById('xp').innerText = xp;
+            document.getElementById('level').innerText = level;
+        }
+
+        // Initialize with some habits
+        addHabit('Exercise');
+        addHabit('Read a book');
+        addHabit('Meditate');
+        addHabit('Drink water');
+    </script>
 </body>
 </html>
