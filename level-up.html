@@ -1,90 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level Up System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        h1 {
-            text-align: center;
-            color: #4CAF50;
-        }
-        .habit {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: #fff;
-            border: 1px solid #ccc;
-            margin: 10px 0;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Level Up System</h1>
-        <div id="habitList"></div>
-        <h2>Your XP: <span id="xp">0</span></h2>
-        <h2>Your Level: <span id="level">1</span></h2>
+        <h1>Welcome to the Level Up System!</h1>
+        <div class="dark-theme">
+            <h2>Dark Theme</h2>
+        </div>
+        <div class="habits">
+            <h2>Your Habits</h2>
+            <ul>
+                <li>Habit 1</li>
+                <li>Habit 2</li>
+                <li>Habit 3</li>
+                <li>Habit 4</li>
+                <li>Habit 5</li>
+                <li>Habit 6</li>
+                <li>Habit 7</li>
+                <li>Habit 8</li>
+                <li>Habit 9</li>
+                <li>Habit 10</li>
+                <li>Habit 11</li>
+            </ul>
+        </div>
+        <div class="levels">
+            <h2>Your Levels</h2>
+            <ol>
+                <li>Level 1</li>
+                <li>Level 2</li>
+                <li>Level 3</li>
+                <li>Level 4</li>
+                <li>Level 5</li>
+                <li>Level 6</li>
+                <li>Level 7</li>
+                <li>Level 8</li>
+                <li>Level 9</li>
+                <li>Level 10</li>
+            </ol>
+        </div>
+        <div class="stats">
+            <h2>Your Stats</h2>
+            <p>Display here</p>
+        </div>
+        <div class="tiers">
+            <h2>Your Tiers</h2>
+            <p>Display here</p>
+        </div>
+        <div class="identity-journal">
+            <h2>Your Identity Journal</h2>
+            <p>Journal entries go here...</p>
+        </div>
+        <div class="animations">
+            <h2>Animations</h2>
+            <p>Fun animations shown here!</p>
+        </div>
     </div>
-
-    <script>
-        const habits = [];
-        let xp = 0;
-        let level = 1;
-
-        function addHabit(name) {
-            habits.push({ name: name, completed: false });
-            updateHabitList();
-        }
-
-        function completeHabit(index) {
-            if (!habits[index].completed) {
-                habits[index].completed = true;
-                xp += 10;
-                updateLevel();
-                updateHabitList();
-            }
-        }
-
-        function updateHabitList() {
-            const habitList = document.getElementById('habitList');
-            habitList.innerHTML = '';
-            habits.forEach((habit, index) => {
-                habitList.innerHTML += `<div class='habit'>${habit.name} <button onclick='completeHabit(${index})'>Complete</button></div>`;
-            });
-        }
-
-        function updateLevel() {
-            if (xp >= level * 100) {
-                level += 1;
-            }
-            document.getElementById('xp').innerText = xp;
-            document.getElementById('level').innerText = level;
-        }
-
-        // Initialize with some habits
-        addHabit('Exercise');
-        addHabit('Read a book');
-        addHabit('Meditate');
-        addHabit('Drink water');
-    </script>
 </body>
 </html>
