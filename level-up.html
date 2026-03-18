@@ -1,61 +1,96 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level Up System</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .level, .habit {
+            margin: 10px 0;
+        }
+        .stats, .tiers {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Level Up System!</h1>
-        <div class="dark-theme">
-            <h2>Dark Theme</h2>
+        <h1>Level Up System</h1>
+        <div class="level">
+            <h2>Your Level:</h2>
+            <p id="level">1</p>
+            <p id="xp">XP: 0/<span id="nextLevelXP">100</span></p>
         </div>
         <div class="habits">
-            <h2>Your Habits</h2>
-            <ul>
-                <li>Habit 1</li>
-                <li>Habit 2</li>
-                <li>Habit 3</li>
-                <li>Habit 4</li>
-                <li>Habit 5</li>
-                <li>Habit 6</li>
-                <li>Habit 7</li>
-                <li>Habit 8</li>
-                <li>Habit 9</li>
-                <li>Habit 10</li>
-                <li>Habit 11</li>
-            </ul>
-        </div>
-        <div class="levels">
-            <h2>Your Levels</h2>
-            <ol>
-                <li>Level 1</li>
-                <li>Level 2</li>
-                <li>Level 3</li>
-                <li>Level 4</li>
-                <li>Level 5</li>
-                <li>Level 6</li>
-                <li>Level 7</li>
-                <li>Level 8</li>
-                <li>Level 9</li>
-                <li>Level 10</li>
-            </ol>
+            <h2>Habits</h2>
+            <div class="habit" id="habit1">Habit 1: <button onclick="completeHabit(1)">Complete</button></div>
+            <div class="habit" id="habit2">Habit 2: <button onclick="completeHabit(2)">Complete</button></div>
+            <!-- Add more habits as needed -->
         </div>
         <div class="stats">
             <h2>Your Stats</h2>
-            <p>Display here</p>
+            <p id="statsView">Total Habits Completed: 0</p>
         </div>
         <div class="tiers">
             <h2>Your Tiers</h2>
-            <p>Display here</p>
-        </div>
-        <div class="identity-journal">
-            <h2>Your Identity Journal</h2>
-            <p>Journal entries go here...</p>
-        </div>
-        <div class="animations">
-            <h2>Animations</h2>
-            <p>Fun animations shown here!</p>
+            <p id="tierView">Current Tier: Novice</p>
         </div>
     </div>
+    <script>
+        let level = 1;
+        let xp = 0;
+        let nextLevelXP = 100;
+        let habitsCompleted = 0;
+        const statsView = document.getElementById('statsView');
+        const levelView = document.getElementById('level');
+        const xpView = document.getElementById('xp');
+        const nextLevelXPView = document.getElementById('nextLevelXP');
+
+        function completeHabit(habitNumber) {
+            habitsCompleted++;
+            xp += 10;
+            if (xp >= nextLevelXP) {
+                levelUp();
+            }
+            updateStats();
+        }
+
+        function levelUp() {
+            level++;
+            xp = xp - nextLevelXP;
+            nextLevelXP *= 1.5;
+            levelView.innerText = level;
+            nextLevelXPView.innerText = Math.round(nextLevelXP);
+            alert('Level Up! You are now level ' + level);
+        }
+
+        function updateStats() {
+            statsView.innerText = 'Total Habits Completed: ' + habitsCompleted;
+            xpView.innerText = 'XP: ' + xp + '/' + nextLevelXP;
+        }
+    </script>
 </body>
 </html>
